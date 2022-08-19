@@ -91,3 +91,56 @@ def classify_reviews():
 
 if __name__ == "__main__":
     classify_reviews()
+
+def train(s):
+  wordList = s.split()
+  dictionary = {}
+
+  # add list of keys for each word in dictionary (dictionary variable defined outside loop)
+  for word in wordList:
+      values = []
+      wordIndex = wordList.index(word)
+      if word not in dictionary:
+        # adding key to dictionary 
+          dictionary[word] = None
+        
+          for innerWord in wordList:
+              innerWIndex = wordList.index(innerWord)
+              if innerWord == word:
+                #values.append(wordList[innerWIndex + 1])
+                values.append("hello")
+                #print("x")
+        
+          #values.append(wordList[wordIndex + 1])
+      else:
+          values.append(wordList[wordIndex + 1])
+    
+      dictionary[word] = values
+
+  print(dictionary)
+
+'''
+# get the index of 'dog'
+index = animals.index('dog')
+'''
+
+train("Yeah baby I like it like that You gotta believe me when I tell you I said I like it like that")
+
+'''
+{
+    'Yeah': ['baby'], 
+    'baby': ['I'], 
+    'I': ['like', 'tell', 'said', 'like'], 
+    'like': ['it', 'that', 'it', 'that'], 
+    'it': ['like', 'like'], 
+    'that': ['You', 'Yeah'], 
+    'You': ['gotta'], 
+    'gotta': ['believe'], 
+    'believe': ['me'], 
+    'me': ['when'], 
+    'when': ['I'], 
+    'tell': ['you'], 
+    'you': ['I'], 
+    'said': ['I']
+}
+'''
