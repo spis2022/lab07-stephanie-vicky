@@ -94,30 +94,26 @@ if __name__ == "__main__":
 
 def train(s):
   wordList = s.split()
+  # wordList.append(wordList[0])
   dictionary = {}
 
-  # add list of keys for each word in dictionary (dictionary variable defined outside loop)
   for word in wordList:
-      values = []
-      wordIndex = wordList.index(word)
-      if word not in dictionary:
-        # adding key to dictionary 
-          dictionary[word] = None
-        
-          for innerWord in wordList:
-              innerWIndex = wordList.index(innerWord)
-              if innerWord == word:
-                #values.append(wordList[innerWIndex + 1])
-                values.append("hello")
-                #print("x")
-        
-          #values.append(wordList[wordIndex + 1])
-      else:
-          values.append(wordList[wordIndex + 1])
-    
-      dictionary[word] = values
+    values = []
+    # look through wordList again to find more instances of word
+    if word not in dictionary:
+      dictionary[word] = None
+      
+      for i in range(len(wordList)-1):
+        if wordList[i] == word:
+          if i == (len(wordList) - 1):
+            values.append(wordList[0])
+            print("AAA")
+          else:
+            values.append(wordList[i+1])
 
-  print(dictionary)
+    print(values)
+  # for word in dictionary:
+  #   print(word + ": " + str(dictionary[word]) + "\n")
 
 '''
 # get the index of 'dog'
