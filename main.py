@@ -5,6 +5,7 @@ nltk.download('stopwords')
 from nltk.classify import NaiveBayesClassifier
 from nltk.corpus import stopwords
 from nltk.classify.util import accuracy
+import random
 
 # "Stop words" that you might want to use in your project/an extension
 stop_words = set(stopwords.words('english'))
@@ -105,22 +106,29 @@ def train(s):
       
       for i in range(len(wordList)-1):
         if wordList[i] == word:
-          if i == (len(wordList) - 1):
+          values.append(wordList[i+1])
+          if wordList[i] == wordList[-1]:
             values.append(wordList[0])
-            print("AAA")
-          else:
-            values.append(wordList[i+1])
-
-    print(values)
+      dictionary[word] = values
+  return dictionary
   # for word in dictionary:
   #   print(word + ": " + str(dictionary[word]) + "\n")
 
-'''
-# get the index of 'dog'
-index = animals.index('dog')
-'''
-
 train("Yeah baby I like it like that You gotta believe me when I tell you I said I like it like that")
+
+def generate(model, first_word, num_words):
+  string = first_word
+  for i in range(num_words - 1):
+    # randomly choose a value for key "first_word" inside model dictionary
+    values = model[first_word]
+    first_word = random.choice(values)
+    string += " " + first_word
+  return string
+  
+
+cardi_B = train("Yeah baby I like it like that You gotta believe me when I tell you I said I like it like that")
+print(generate(cardi_B, "I", 10))
+
 
 '''
 {
